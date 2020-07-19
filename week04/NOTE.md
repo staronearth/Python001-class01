@@ -1,1 +1,3 @@
 学习笔记
+本周主要是对pandas的学习和对数据的snowNLP的学习
+详细见xmind

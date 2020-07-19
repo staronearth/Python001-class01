@@ -17,19 +17,10 @@ NEWSPIDER_MODULE = 'maoyan.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363'
-USER_AGENT_LIST=[
-'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36'
-    "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3",
-    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3",
-    "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE)",
-    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3",
-    "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3",
-    "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24",
-    "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"
-]
+
+from fake_useragent import UserAgent
 import random
-USER_AGENT = random.choice(USER_AGENT_LIST)
+USER_AGENT = UserAgent(verify_ssl=False).random
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -55,8 +46,10 @@ COOKIES_ENABLED = True
 DEFAULT_REQUEST_HEADERS = {
   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
   'Accept-Language': 'en',
-  'Cookie':'__mta=209024557.1593305797553.1593322986526.1593323765666.19; _csrf=4be9262c230ad84d682a87f945edd67894d4f268bb1f4808061e8ccd819be6fe; Hm_lpvt_703e94591e87be68cc8da0da7cbd0be2=1593323765; lt=PBR3YhVtVGfpnKi1cHX4mj96wdAAAAAA5woAAFyoV39r4Ygq_45WqHPcvscdAN-yKTtnx7ChK7Tb_wgijpDrIVi63lr6zRjggUfZ4Q; lt.sig=TQg_-RbzplQzNXESUQO73Nh-iNo; uuid_n_v=v1; mojo-uuid=6bfda18a9a66c605f9b2b47d55f19f88; uuid=3A5CBD10B84211EAB11C23537EB4C64B0436B67683E64E3E96EC3DDD88A54825; _lxsdk_cuid=172f489361ac7-0949cdbf8424cf-71415a3a-100200-172f489361bc8; __mta=209024557.1593305797553.1593322712910.1593322986526.16; Hm_lvt_703e94591e87be68cc8da0da7cbd0be2=1593240614,1593240644,1593275083,1593322663; mojo-session-id={"id":"cc688f108687b47dbd72e0f3321b481c","time":1593320613360}; mojo-trace-id=21; _lxsdk=3A5CBD10B84211EAB11C23537EB4C64B0436B67683E64E3E96EC3DDD88A54825; _lx_utm=utm_source%3DBaidu%26utm_medium%3Dorganic; _lxsdk_s=172f94eacd9-2dd-41b-3%7C52130765%7C36'
-}
+  'Cookie':'uuid_n_v=v1; uuid=63030590B82311EA974289B279A7041DC0A3AE716C6F48FD81BAC6913B0ECA54; mojo-uuid=3c2d7b5f04e7657f93bd709c02e7163d; _lxsdk_cuid=172f3beebe7c8-0d8552c9ed5257-4353760-100200-172f3beebe7c8; _lxsdk=63030590B82311EA974289B279A7041DC0A3AE716C6F48FD81BAC6913B0ECA54; _lx_utm=utm_source%3DBaidu%26utm_medium%3Dorganic; _csrf=73c7282091a649765f6b591c9f87f202ddaf48c18aed8deaf4dcbba8d9f50fb4; mojo-session-id={"id":"923b96aca7bd40de0df893461b378576","time":1593911216720}; lt=cIZXK9lADb0J9uoestvn4INw6sYAAAAAAwsAANiHHXemCo8XRyX9xCUcxgCx5yRWcdJuru2i2vnwmPnCwrXHFhuap9CZTyABCTdE1g; lt.sig=PDNmVyy-SaXk9P9RYxEF180lDDQ; Hm_lvt_703e94591e87be68cc8da0da7cbd0be2=1593310287,1593323746,1593774741,1593912729; __mta=188462999.1593227276279.1593911229910.1593912729809.50; mojo-trace-id=9; Hm_lpvt_703e94591e87be68cc8da0da7cbd0be2=1593912741; _lxsdk_s=1731c830ac3-208-1b1-391%7C%7C12',
+  'Referer':'https://passport.meituan.com/account/unitivelogin?service=maoyan&continue=https%3A%2F%2Fmaoyan.com%2Fpassport%2Flogin%3Fredirect%3D%252F',
+  'Host':'maoyan.com'
+  }
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
@@ -66,9 +59,15 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'maoyan.middlewares.MaoyanDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   'maoyan.middlewares.MaoyanDownloaderMiddleware': 543,
+   'maoyan.middlewares.RandomHttpProxyMiddleware': 400,
+}
+
+HTTP_PROXY_LIST = [
+     'http://52.179.231.206:80',
+     'http://95.0.194.241:9090',
+]
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -78,9 +77,9 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'maoyan.pipelines.MaoyanPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'maoyan.pipelines.MaoyanPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

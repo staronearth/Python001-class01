@@ -13,9 +13,10 @@ class MaoyanmovieSpider(scrapy.Spider):
     #     pass
     
     def start_request(self):
-        for page in range(2):
+        for page in range(1):
             url=f'https://maoyan.com/films?showType=10?offset={page*30}'
-            yield scrapy.Requeset(url,callback=self.parse,dont_filter=False)
+            yield scrapy.Request(url,callback=self.parse,dont_filter=False)
+            
     
     def parse(self,response):
         # print(response.text)
@@ -34,9 +35,6 @@ class MaoyanmovieSpider(scrapy.Spider):
         filmtype = film_info.xpath('./ul/li[1]/a[@class="text-link"]/text()').extract()
         filmtime = film_info.xpath('./ul/li[3]/text()').extract_first()
 
-        print(filmname)
-        print(filmtype)
-        print(filmtime)
         item['filmname']=filmname
         item['filmtype']=filmtype
         item['filmtime']=filmtime
